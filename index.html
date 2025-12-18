@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Baby ❤️</title>
+
+<style>
+body {
+    background: linear-gradient(to right, #ff9a9e, #fad0c4);
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 30px;
+    overflow-x: hidden;
+}
+
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    max-width: 90%;
+    margin: auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    color: #ff4d6d;
+    font-size: 32px;
+}
+
+p {
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+button {
+    background: #ff4d6d;
+    border: none;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.kiss {
+    position: fixed;
+    bottom: 0;
+    font-size: 32px;
+    z-index: 9999;
+    animation: flyUp 4s linear forwards;
+}
+
+@keyframes flyUp {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-120vh) scale(1.6);
+        opacity: 0;
+    }
+}
+
+#photo {
+    display: none;
+    margin-top: 20px;
+}
+
+#photo img {
+    width: 200px;
+    border-radius: 20px;
+    animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#typing {
+    font-size: 22px;
+    color: #ff4d6d;
+    margin-top: 15px;
+    min-height: 30px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    z-index: 10000;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div id="step1">
+        <button onclick="showBirthday()">Click here baby 💖</button>
+    </div>
+
+    <div id="step2" style="display:none;">
+        <h1>Happy Birthday Madeeha 🎉</h1>
+        <button onclick="showMessage()">Next surprise 💌</button>
+    </div>
+
+    <div id="step3" style="display:none;">
+        <p>
+            Happy Birthday my baby ❤️  
+            Madeeha, you are my comfort, my happiness, and my safe place.
+            Every smile of yours makes my world brighter.
+            On your birthday, I just want you to know that you are deeply loved,
+            cared for, and cherished. I’m grateful to have you in my life,
+            baby, today and always 💕
+        </p>
+        <button onclick="finalSurprise()">One last thing 😘</button>
+
+        <div id="typing"></div>
+
+        <div id="photo">
+            <img src="madeeha.jpg" alt="My Baby">
+        </div>
+    </div>
+
+</div>
+
+<div class="popup" id="popup">
+    <h2>Always yours 💖</h2>
+    <p>
+        No matter what, I’ll always choose you, baby.
+        You mean everything to me ❤️
+    </p>
+</div>
+
+<audio id="loveMusic">
+    <source src="love.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function showBirthday() {
+    step1.style.display = "none";
+    step2.style.display = "block";
+}
+
+function showMessage() {
+    step2.style.display = "none";
+    step3.style.display = "block";
+}
+
+function finalSurprise() {
+
+    // Play music
+    const music = document.getElementById("loveMusic");
+    if (music) music.play().catch(()=>{});
+
+    // Flying kisses
+    const emojis = ["😘","💋","❤️"];
+    for (let i = 0; i < 50; i++) {
+        const kiss = document.createElement("div");
+        kiss.className = "kiss";
+        kiss.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+        kiss.style.left = Math.random() * window.innerWidth + "px";
+        document.body.appendChild(kiss);
+        setTimeout(()=>kiss.remove(),4000);
+    }
+
+    // Typing text
+    const text = "I love you baby ❤️";
+    let i = 0;
+    const typing = document.getElementById("typing");
+    typing.innerHTML = "";
+    const interval = setInterval(() => {
+        typing.innerHTML += text.charAt(i);
+        i++;
+        if (i >= text.length) clearInterval(interval);
+    }, 120);
+
+    // Show photo
+    setTimeout(() => {
+        document.getElementById("photo").style.display = "block";
+    }, 2000);
+
+    // Final popup
+    setTimeout(() => {
+        document.getElementById("popup").style.display = "block";
+    }, 4000);
+}
+</script>
+
+</body>
+</html>
